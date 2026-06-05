@@ -1,6 +1,25 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:  
-  name: <place-name-here>
+  name: cd-pipeline
 spec:
+  params:
+    - name: text-to-print
+    - name: repo-url
+    - name: branch
   tasks:
+    - name: echo
+      taskRef:
+        name: echo
+      params:
+       - name: message
+         value:  "$(params.text-to-print)"
+    - name: checkout
+      taskRef:
+        - name: checkout
+      params:
+        - name: repo-url
+          value: "$(params.repo-url)"
+        - name: branch
+          value: "$(params.repo url)"
+
